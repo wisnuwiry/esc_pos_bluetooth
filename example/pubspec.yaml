@@ -12,7 +12,7 @@ dependencies:
   oktoast: ^2.3.0
   image: ^2.1.4
   esc_pos_bluetooth:
-    path: ../../
+    path: ../
   esc_pos_utils: ^0.3.6
   # esc_pos_utils:
     # path: ../../../esc_pos_utils

@@ -1,13 +1,11 @@
-import 'dart:io';
 import 'dart:typed_data';
-import 'package:intl/intl.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:path_provider/path_provider.dart';
+
+import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
+import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart';
 import 'package:image/image.dart';
-import 'package:esc_pos_utils/esc_pos_utils.dart';
-import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
-import 'package:flutter/material.dart' hide Image;
+import 'package:intl/intl.dart';
 import 'package:oktoast/oktoast.dart';
 
 void main() => runApp(MyApp());
@@ -66,9 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
     final Ticket ticket = Ticket(paper);
 
     // Print image
-    final ByteData data = await rootBundle.load('assets/rabbit_black.jpg');
-    final Uint8List bytes = data.buffer.asUint8List();
-    final Image image = decodeImage(bytes);
+    // final ByteData data = await rootBundle.load('assets/rabbit_black.jpg');
+    // final Uint8List bytes = data.buffer.asUint8List();
+    // final Image image = decodeImage(bytes);
     // ticket.image(image);
 
     ticket.text('GROCERYLY',

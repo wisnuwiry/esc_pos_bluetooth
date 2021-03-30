@@ -8,9 +8,11 @@
 
 import 'dart:async';
 import 'dart:io';
+
 import 'package:esc_pos_utils/esc_pos_utils.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
+import 'package:rxdart/rxdart.dart';
+
 import './enums.dart';
 
 /// Bluetooth printer
@@ -76,7 +78,7 @@ class PrinterBluetoothManager {
     int chunkSizeBytes = 20,
     int queueSleepTimeMs = 20,
   }) async {
-    final Completer<PosPrintResult> completer = Completer();
+    Completer<PosPrintResult> completer = Completer();
 
     const int timeout = 5;
     if (_selectedPrinter == null) {
@@ -114,7 +116,12 @@ class PrinterBluetoothManager {
               sleep(Duration(milliseconds: queueSleepTimeMs));
             }
 
-            completer.complete(PosPrintResult.success);
+            if (!completer.isCompleted) {
+              completer = Completer();
+              completer.complete(PosPrintResult.success);
+            } else {
+              completer.complete(PosPrintResult.success);
+            }
           }
           // TODO sending disconnect signal should be event-based
           _runDelayed(3).then((dynamic v) async {
