@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
-  List<PrinterBluetooth> _devices = [];
+  List<BluetoothDevice> _devices = [];
 
   @override
   void initState() {
@@ -275,7 +275,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ticket;
   }
 
-  void _testPrint(PrinterBluetooth printer) async {
+  void _testPrint(BluetoothDevice printer) async {
     printerManager.selectPrinter(printer);
 
     // TODO Don't forget to choose printer's paper

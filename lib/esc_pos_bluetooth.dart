@@ -7,5 +7,7 @@
  */
 library esc_pos_bluetooth;
 
+export 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
+
 export './src/enums.dart';
 export './src/printer_bluetooth_manager.dart';
