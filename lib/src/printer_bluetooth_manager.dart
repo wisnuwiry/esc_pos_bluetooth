@@ -10,7 +10,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
-import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_basic/flutter_bluetooth_basic.dart';
 import 'package:rxdart/rxdart.dart';
@@ -20,7 +19,7 @@ import './enums.dart';
 /// Printer Bluetooth Manager
 class PrinterBluetoothManager {
   final BluetoothManager _bluetoothManager = BluetoothManager.instance;
-  StreamSubscription _isScanningSubscription;
+  StreamSubscription? _isScanningSubscription;
 
   final BehaviorSubject<bool> _isScanning = BehaviorSubject.seeded(false);
   Stream<bool> get isScanningStream => _isScanning.stream;
@@ -91,7 +90,7 @@ class PrinterBluetoothManager {
 
     if (!(await _bluetoothManager.isConnected)) {
       return Future<PosPrintResult>.value(PosPrintResult.printerNotSelected);
-    } else if (_isScanning.value) {
+    } else if (_isScanning.value ?? false) {
       return Future<PosPrintResult>.value(PosPrintResult.scanInProgress);
     }
 
@@ -139,16 +138,16 @@ class PrinterBluetoothManager {
   }
 
   Future<PosPrintResult> printTicket(
-    Ticket ticket, {
+    List<int> ticket, {
     int chunkSizeBytes = 20,
     int queueSleepTimeMs = 20,
   }) async {
     try {
-      if (ticket == null || ticket.bytes.isEmpty) {
+      if (ticket.isEmpty) {
         return Future<PosPrintResult>.value(PosPrintResult.ticketEmpty);
       }
       return writeBytes(
-        ticket.bytes,
+        ticket,
         chunkSizeBytes: chunkSizeBytes,
         queueSleepTimeMs: queueSleepTimeMs,
       );
