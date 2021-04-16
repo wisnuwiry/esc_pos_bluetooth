@@ -135,11 +135,9 @@ packages:
   flutter_bluetooth_basic:
     dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a4b2deb30b8c051d89e36fbbbf57df2c78aa76a7
-      url: "https://github.com/wisnuwiry/flutter_bluetooth_basic.git"
-    source: git
+      path: "../../flutter_bluetooth_basic"
+      relative: true
+    source: path
     version: "0.1.5"
   flutter_test:
     dependency: "direct dev"
